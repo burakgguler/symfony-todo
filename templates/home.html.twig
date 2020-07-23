@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}username's Todo List{% endblock %}
+{% block body %}
+    {% if todos %}
+        <table id="todos" class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>To-Do Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in todos %}
+                    <tr>
+                        <td> {{ todo.title }} </td>
+                        <td> {{ todo.description }} </td>
+                        <td>{{ todo.duedate|date('Y-m-d') }}</td>
+                        {% if todo.completed %}
+                            <td>Yes</td>
+                            {% else %}
+                                <td>No</td>
+                        {% endif %}
+                        <td>
+                            <a href="{{ path('todo_show', {id: todo.id}) }}" class="btn btn-dark">Show</a>
+                            <a href="{{ path('todo_update', {id: todo.id}) }}" class="btn btn-light">Update</a>
+                            <a href="#" class="btn btn-danger delete-todo" data-id = {{ todo.id }}>Delete</a>
+                        </td>
+                    </tr>
+                    
+                {% endfor %}
+
+            </tbody>
+
+
+        </table>
+    {% else %}
+        <p>Deneme</p>
+
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+        <script src="/js/main.js"></script>
+{% endblock %}

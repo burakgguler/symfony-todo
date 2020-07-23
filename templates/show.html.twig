@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}username's Todo List{% endblock %}
+{% block body %}
+    <h1>{{ todo.title }}</h1>
+    <p>{{ todo.description }}</p>
+    <p>Due Date: {{ todo.duedate|date('Y-m-d') }}</p>
+    {% if todo.completed %}
+    <p>The task is completed.</p>
+    {% else %}
+        <p>The task is NOT completed.</p>
+    {% endif %}
+{% endblock %}
