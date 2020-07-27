@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Repository\TodoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Todo
 {
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,6 +38,12 @@ class Todo
      * @ORM\Column(type="boolean")
      */
     private $completed = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="todos")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $userID;
 
     public function getId(): ?int
     {
@@ -72,6 +80,18 @@ class Todo
 
     public function setCompleted($completed) {
         $this->completed = $completed;
+    }
+
+    public function getUserID(): ?User
+    {
+        return $this->userID;
+    }
+
+    public function setUserID(?User $userID): self
+    {
+        $this->userID = $userID;
+
+        return $this;
     }
 
     
