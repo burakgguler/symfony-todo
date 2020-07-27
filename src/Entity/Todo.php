@@ -44,7 +44,6 @@ class Todo
      * @ORM\JoinColumn(nullable=false)
      */
     private $userID;
-
     public function getId(): ?int
     {
         return $this->id;

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}username's Todo List{% endblock %}
+{% block title %}{{ app.user.username }}'s Todo List{% endblock %}
 {% block body %}
     {% if todos %}
         <table id="todos" class="table table-stripped">
