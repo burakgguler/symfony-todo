@@ -23,10 +23,9 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        $todos = $this->getDoctrine()->getRepository(
-            Todo::class)->findAll();
+        
 
-        return $this->render('/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'todos' => $todos]);
+        return $this->render('/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
@@ -34,6 +33,6 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        return new RedirectResponse($this->urlGenerator->generate('todo_index'));
     }
 }

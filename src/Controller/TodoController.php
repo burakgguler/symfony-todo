@@ -4,7 +4,7 @@
     use App\Entity\User;
     use App\Entity\Todo;
     use App\Form\NewTodoType;
-    use App\Form\RegisterType;
+    use App\Form\RegistrationFormType;
     use App\Form\UpdateTodoType;
 
     use Symfony\Component\HttpFoundation\Response;
@@ -24,11 +24,11 @@
 
         }
 
-        /**
-         * @Route("/user/new", name = "new_user")
-         * @Method({"GET", "POST"})
-         */
-        public function newUser(Request $request){
+       // /**
+       //  * @Route("/user/new", name = "new_user")
+       //  * @Method({"GET", "POST"})
+        // */
+       /* public function newUser(Request $request){
             $user = new User();
 
             $form = $this->createForm(RegisterType::class, $user);
@@ -48,7 +48,7 @@
             return $this->render('register.html.twig', array(
                 'form' => $form->createView()
             ));
-        }
+        } */
 
         /**
          * @Route("home", name = "todo_home")
@@ -88,6 +88,7 @@
 
                if($form->isSubmitted() && $form->isValid()) {
                    $todo = $form->getData();
+                   $todo->setUserID($this->getUser());
 
                    $entityManager = $this->getDoctrine()->getManager();
                    $entityManager->persist($todo);
