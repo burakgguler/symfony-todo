@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class UpdateTodoType extends AbstractType
 {
@@ -23,14 +25,34 @@ class UpdateTodoType extends AbstractType
             array('class' => 'form-control')))
             ->add('duedate', DateType::class, array('attr' =>
             array('class' => 'form-control')))
-            ->add('completed', CheckboxType::class, array(
+            /*->add('completed', CheckboxType::class, array(
                 'label'    => 'Check it if task is completed!',
                 'required' => false,
-            ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Update',
-                'attr' => array('class' => 'btn btn-primary mt-3')
-                ))
+            ))*/
+
+            
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
+                $todo = $event->getData();
+                $form = $event->getForm();
+
+                if(null != $todo->getId()){
+
+                
+                if($todo->getCompleted()){
+                    $form->add('completed', CheckboxType::class, array(
+                        'label'    => 'Uncheck it if task is not completed yet!',
+                        'required' => false,
+                    ));
+                }
+                else{
+                    $form->add('completed', CheckboxType::class, array(
+                        'label'    => 'Check it if task is completed!',
+                        'required' => false,
+                    ));
+                }
+            }
+            })
+            
         ;
     }
 

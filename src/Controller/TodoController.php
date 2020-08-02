@@ -9,6 +9,8 @@
 
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+    use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
     use Symfony\Component\Routing\Annotation\Route;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -71,7 +73,12 @@
            * @Route("/todo/{id}", name = "todo_show")
            */
           public function show(Todo $todo) {
-              return $this->render('show.html.twig', array('todo' => $todo));
+              if($this->getUser()==$todo->getUserID()){
+                return $this->render('show.html.twig', array('todo' => $todo));
+              }
+              else {
+                throw new AccessDeniedException('Access denied. Ok???');
+              }
           } 
 
           /**
@@ -82,7 +89,7 @@
            public function newTodo(Request $request){
                $todo = new Todo();
 
-               $form = $this->createForm(NewTodoType::class,$todo);
+               $form = $this->createForm(UpdateTodoType::class,$todo);
 
                $form->handleRequest($request);
 
@@ -121,6 +128,9 @@
 
            public function updateTodo(Request $request, Todo $todo){
 
+            if($this->getUser()==$todo->getUserID()){
+
+            
             $form = $this->createForm(UpdateTodoType::class,$todo);
 
             $form->handleRequest($request);
@@ -137,6 +147,10 @@
 
             return $this->render('update.html.twig', array(
                 'form' => $form->createView()));
+            }
+            else{ 
+                throw new AccessDeniedException('Access denied. Ok???');
+            }
         }
 
          
