@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\User;
 use App\Repository\TodoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TodoRepository::class)
@@ -21,6 +22,8 @@ class Todo
 
     /**
      * @ORM\Column(type="text", length = 50)
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $title;
 

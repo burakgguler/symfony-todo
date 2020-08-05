@@ -1,0 +1,14 @@
+{% set errorMessages = app.session.flashbag.get('error') %}
+{% set successMessages = app.session.flashbag.get('success') %}
+
+{% if errorMessages %}
+    {% for message in errorMessages %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}   
+{% endif %}
+
+{% if successMessages %}
+    {% for message in successMessages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+{% endif %}
