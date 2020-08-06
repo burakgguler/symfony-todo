@@ -1,19 +1,16 @@
 <?php
     namespace App\Controller;
 
-    use App\Entity\User;
     use App\Entity\Todo;
-    use App\Form\RegistrationFormType;
     use App\Form\TodoType;
-
+    use App\Service\FileUploadService;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-    use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-    use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
     
 
     class TodoController extends AbstractController{
@@ -61,14 +58,17 @@
                $this->addFlash('error','Page not found!');
                return $this->render('index.html.twig');
             }
-          } 
+          }
 
         /**
-        * @Route("/new", name = "todo_new")
-        * @Method({"GET", "POST"})
-        */
+         * @Route("/new", name = "todo_new")
+         * @Method({"GET", "POST"})
+         * @param Request $request
+         * @param FileUploadService $fileUploadService
+         * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+         */
 
-        public function newTodo(Request $request){
+        public function newTodo(Request $request, FileUploadService $fileUploadService){
             $todo = new Todo();
 
             $form = $this->createForm(TodoType::class,$todo);
@@ -78,6 +78,13 @@
             if($form->isSubmitted() && $form->isValid()) {
                 $todo = $form->getData();
                 $todo->setUserID($this->getUser());
+
+                /** @var UploadedFile $file */
+                $file = $form->get('file')->getData();
+                if ($file) {
+                    $fileName = $fileUploadService->upload($file);
+                    $todo->setFile($fileName);
+                }
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($todo);

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Todo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -49,6 +50,12 @@ class TodoType extends AbstractType
                 }
             }
             })
+
+            ->add('file',FileType::class, array(
+                'label' => 'Upload files!',
+                'mapped' => false,
+                'required' => false
+            ))
             
         ;
     }

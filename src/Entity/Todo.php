@@ -47,6 +47,12 @@ class Todo
      * @ORM\JoinColumn(nullable=false)
      */
     private $userID;
+
+    /**
+     * @ORM\Column (type="string",nullable=true)
+     */
+    private $file;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,6 +100,14 @@ class Todo
         $this->userID = $userID;
 
         return $this;
+    }
+
+    public function getFile() {
+        return $this->file;
+    }
+
+    public function setFile($file) {
+        $this->file = $file;
     }
 
     
