@@ -20,18 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b13c1c97-46bb-4392-9edf-7f6b1b0319c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/todo.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/FileUploadService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TodoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TodoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Todo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Todo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/TodoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/TodoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/update.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/update.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/files/thatsme-5f2bd670efc0d.jpeg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +118,8 @@
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
     </include_path>
   </component>
   <component name="ProjectId" id="1fiNkSWYKkNNCMULs5EiDUT8IU4" />
@@ -156,7 +147,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596697096200</updated>
-      <workItem from="1596697097776" duration="8788000" />
+      <workItem from="1596697097776" duration="9207000" />
     </task>
     <servers />
   </component>
